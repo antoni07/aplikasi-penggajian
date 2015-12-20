@@ -10,22 +10,28 @@ include "fungsi.php";
 <head>
 
 <title>Program Penggajian</title>
+
 <link rel="stylesheet" type="text/css" href="images/style.css" />
 <script type="text/javascript">
-
-function hitung_gaji() {
-	var jam_lembur = document.transfer.jam_lembur.value;
-	var uang_lembur = document.transfer.uang_lembur.value;
-	var gaji_utama = document.transfer.gaji_utama.value;
-	uang_lembur = ( gaji_utama / 173 ) * jam_lembur;
-	document.transfer.uang_lembur.value = Math.floor( uang_lembur );
+<?php
+class ntest {
+	var $jam_lembur; 
+	var $uang_lembur;
+	var $gaji_utama;
+	var $aa;
+	
+	function hitung_gaji() {
+	$uang_lembur=173  * jam_lembur;
 }
-
-function tanya(id) {
-	var aa = confirm( 'Yakin akan menghapus data dengan ID - ' + id + '?' );
+function tanya() {
+	
 	if( aa == true ) return true;
 	else return false;
 }
+}
+?>
+
+
 </script>
 </head>
 <body>
@@ -104,6 +110,10 @@ if( $user_id ) {
 				
 				echo "			<a href=\"".URL."/index.php?page=edit-karyawan&kary_id={$row_karyawan['kary_id']}\" title=\"Ubah Karyawan &rarr; {$row_karyawan['nama_kar']}\"><img src=\"".URL."/images/b_edit.png\"></a> &nbsp;\n";
 				//hapus data karyawan
+				
+				$tanyaa= new ntest;
+				echo $jam_lembur = document.transfer.jam_lembur.value;
+				$tanyaa -->tanya();
 				echo "			<a href=\"".URL."/index.php?page=delete-karyawan&kary_id={$row_karyawan['kary_id']}\" title=\"Hapus Karyawan &rarr; {$row_karyawan['nama_kar']}\" onclick=\"return tanya('".$row_karyawan['kary_id']."')\"><img src=\"".URL."/images/b_drop.png\"></a></td>\n";
 				echo "	</tr>\n";
 				$no++;
@@ -208,7 +218,15 @@ if( $user_id ) {
 				unset( $_SESSION['gaji']['gagal'] );
 			}
 			
+		
+			
+			
 			echo "			<form method=\"post\" action=\"\" autocomplete=\"off\" class=\"form\" name=\"transfer\">\n";
+			$hitungg= new ntest;
+			echo $jam_lembur = document.transfer.jam_lembur.value;
+			echo $uang_lembur = document.transfer.uang_lembur.value;
+			echo $gaji_utama = document.transfer.gaji_utama.value;
+			$hitungg -->hitung_gaji();
 			echo "				<input type=\"text\" name=\"jam_lembur\" placeholder=\"Isi total jam lembur\" onkeyup=\"hitung_gaji()\" onkeydown=\"hitung_gaji()\" onchange=\"hitung_gaji()\"> &nbsp; \n";
 			echo "				<input type=\"text\" name=\"gaji_utama\" value=\"{$transfer['gaji_utama']}\" style=\"display:none;\">\n";
 			echo "				<input type=\"text\" name=\"kode_gaji\" value=\"".AturKode( "tb_gaji", "kode_gaji", "GJ" )."\" style=\"display:none;\">\n";
